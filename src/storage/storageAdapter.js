@@ -5,16 +5,18 @@ let adapter;
 
 if (Capacitor.isNativePlatform()) {
   // Usar Capacitor Preferences no mobile
-  const { Preferences } = await import('@capacitor/preferences');
   adapter = {
     async setItem(key, value) {
+      const { Preferences } = await import('@capacitor/preferences');
       await Preferences.set({ key, value: JSON.stringify(value) });
     },
     async getItem(key) {
+      const { Preferences } = await import('@capacitor/preferences');
       const { value } = await Preferences.get({ key });
       return value ? JSON.parse(value) : null;
     },
     async removeItem(key) {
+      const { Preferences } = await import('@capacitor/preferences');
       await Preferences.remove({ key });
     }
   };
