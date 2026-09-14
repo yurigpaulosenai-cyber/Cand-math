@@ -7,6 +7,7 @@ const LEGACY_KEY = 'candymath_v2';
 
 export async function saveState() {
   await saveData(SAVE_KEY, {
+    profile: G.profile,
     stars: G.stars,
     phase: G.phase,
     totalCorrect: G.totalCorrect,
@@ -44,6 +45,7 @@ export async function loadState() {
   if (!data) return;
   
   // Aplicar ao estado global G
+  G.profile = data.profile || null;
   G.stars = data.stars || 0;
   G.phase = data.phase || 1;
   G.totalCorrect = data.totalCorrect || 0;

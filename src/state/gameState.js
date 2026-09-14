@@ -1,4 +1,5 @@
 export const G = {
+  profile: null,
   stars: 0,
   phase: 1,
   totalCorrect: 0,
@@ -16,6 +17,7 @@ export const G = {
 };
 
 export function resetGameState() {
+  G.profile = null;
   G.stars = 0;
   G.phase = 1;
   G.totalCorrect = 0;

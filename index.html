@@ -12,6 +12,44 @@
 </head>
 <body>
 
+  <!-- ===== LOGIN SCREEN ===== -->
+  <div id="screenLogin" class="screen active">
+    <div class="login-bg">
+      <div class="candy-float" style="--d:0s;--x:10%"><i class="fa-solid fa-cookie-bite"></i></div>
+      <div class="candy-float" style="--d:1.5s;--x:80%"><i class="fa-solid fa-candy-cane"></i></div>
+    </div>
+    <div class="login-container">
+      <div class="login-koala">
+        <img src="/assets/images/jaguar.jpg" alt="Juju" style="width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;">
+      </div>
+      <h1 class="login-title">Bem-vindo(a) ao<br>Candy Math!</h1>
+      <p class="login-sub">Crie seu perfil para começar a jogar</p>
+      
+      <form id="loginForm" class="login-form">
+        <div class="form-group">
+          <label for="childName"><i class="fa-solid fa-child"></i> Nome da Criança</label>
+          <input type="text" id="childName" placeholder="Ex: Joãozinho" required>
+        </div>
+        <div class="form-group">
+          <label for="childAge"><i class="fa-solid fa-cake-candles"></i> Idade</label>
+          <input type="number" id="childAge" placeholder="Ex: 8" min="3" max="15" required>
+        </div>
+        <div class="form-group">
+          <label for="guardianName"><i class="fa-solid fa-user-shield"></i> Nome do Responsável</label>
+          <input type="text" id="guardianName" placeholder="Ex: Maria (Mãe)" required>
+        </div>
+        <div class="form-group">
+          <label for="guardianEmail"><i class="fa-solid fa-envelope"></i> E-mail do Responsável</label>
+          <input type="email" id="guardianEmail" placeholder="Ex: maria@email.com" required>
+        </div>
+        
+        <button type="submit" class="btn-login-submit">
+          Criar Perfil e Jogar! <i class="fa-solid fa-rocket"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
   <!-- ===== SPLASH SCREEN ===== -->
   <div id="screenSplash" class="screen active">
     <div class="splash-bg">
