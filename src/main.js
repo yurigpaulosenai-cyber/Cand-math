@@ -8,7 +8,6 @@ import { setupParticleCanvas } from './effects/particles.js';
 import { speakText, toggleSound } from './audio/soundManager.js';
 import { handleTFAnswer } from './games/trueFalseGame.js';
 import { checkPuzzle, giveHint, nextPuzzle } from './games/puzzleGame.js';
-import { setupLogin } from './ui/loginUI.js';
 import { G } from './state/gameState.js';
 import { $ } from './utils/dom.js';
 
@@ -18,14 +17,22 @@ window.triggerSave = saveState; // For explicit saves across the app if needed
 
 document.addEventListener('DOMContentLoaded', async () => {
   await loadState();
-  setupLogin();
   
-  if (G.profile && G.profile.childName) {
-    document.querySelector('.splash-koala-bubble').textContent = `Olá, ${G.profile.childName}! Sou Juju Candy!`;
-    showScreen('screenSplash');
-  } else {
-    showScreen('screenLogin');
+  const isGuest = sessionStorage.getItem('guest') === 'true';
+  const hasProfile = G.profile && G.profile.childName;
+  
+  // Guardião de Rota: se não tem perfil nem é visitante, volta pro login
+  if (!hasProfile && !isGuest) {
+    window.location.href = '/login.html';
+    return;
   }
+  
+  // Bem-vindo personalizado
+  const splashBubble = document.querySelector('.splash-koala-bubble');
+  if (splashBubble) {
+    splashBubble.textContent = hasProfile ? `Olá, ${G.profile.childName}! Sou Juju Candy!` : `Olá, Visitante! Sou Juju Candy!`;
+  }
+  showScreen('screenSplash');
   
   const btnPlay = $('btnPlay');
   if (btnPlay) {

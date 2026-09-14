@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Candy Math - Login</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== TOAST CONTAINER ===== -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <div class="login-bg">
+    <div class="candy-float" style="--d:0s;--x:10%"><i class="fa-solid fa-cookie-bite"></i></div>
+    <div class="candy-float" style="--d:1.5s;--x:80%"><i class="fa-solid fa-candy-cane"></i></div>
+  </div>
+
+  <div class="login-container">
+    <div class="login-koala">
+      <img src="/assets/images/jaguar.jpg" alt="Juju" style="width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;">
+    </div>
+    <h1 class="login-title">Bem-vindo(a) ao<br>Candy Math!</h1>
+    
+    <!-- MENU INICIAL -->
+    <div id="viewMenu" style="width: 100%; max-width: 360px; display: flex; flex-direction: column; gap: 12px; margin-top: 20px;">
+      <button id="btnEntrar" class="btn-login-submit" style="background: linear-gradient(135deg, #7b52ff, #a980ff);">
+        Entrar <i class="fa-solid fa-arrow-right-to-bracket"></i>
+      </button>
+      <button id="btnCriar" class="btn-login-submit">
+        Criar Conta <i class="fa-solid fa-user-plus"></i>
+      </button>
+      <button id="btnVisitante" class="btn-login-submit" style="background: linear-gradient(135deg, #ff9f43, #ffc048); color: #fff;">
+        Jogar Sem Conta <i class="fa-solid fa-ghost"></i>
+      </button>
+    </div>
+
+    <!-- FORMULÁRIO DE CRIAÇÃO (Escondido inicialmente) -->
+    <div id="viewForm" style="display: none; width: 100%;">
+      <p class="login-sub" style="text-align:center;">Crie seu perfil para começar a jogar</p>
+      
+      <form id="loginForm" class="login-form" style="margin: 0 auto;">
+        <div class="form-group">
+          <label for="childName"><i class="fa-solid fa-child"></i> Nome da Criança</label>
+          <input type="text" id="childName" placeholder="Ex: Joãozinho" required>
+        </div>
+        <div class="form-group">
+          <label for="childAge"><i class="fa-solid fa-cake-candles"></i> Idade</label>
+          <input type="number" id="childAge" placeholder="Ex: 8" min="3" max="15" required>
+        </div>
+        <div class="form-group">
+          <label for="guardianName"><i class="fa-solid fa-user-shield"></i> Nome do Responsável</label>
+          <input type="text" id="guardianName" placeholder="Ex: Maria (Mãe)" required>
+        </div>
+        <div class="form-group">
+          <label for="guardianEmail"><i class="fa-solid fa-envelope"></i> E-mail do Responsável</label>
+          <input type="email" id="guardianEmail" placeholder="Ex: maria@email.com" required>
+        </div>
+        
+        <button type="submit" class="btn-login-submit">
+          Salvar e Jogar! <i class="fa-solid fa-rocket"></i>
+        </button>
+        <button type="button" id="btnVoltar" style="background: none; border: none; color: var(--purple); font-weight: bold; margin-top: 10px; cursor: pointer;">
+          <i class="fa-solid fa-arrow-left"></i> Voltar
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="src/loginMain.js"></script>
+</body>
+</html>
