@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candy Math</title>
+  <meta name="description" content="Candy Math - Jogo educativo de matemática com temática de doces para crianças. Aprenda adição, subtração, multiplicação e divisão de forma divertida!">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Comic+Neue:wght@400;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== SPLASH SCREEN ===== -->
+  <div id="screenSplash" class="screen active">
+    <div class="splash-bg">
+      <div class="candy-float" style="--d:0s;--x:8%"><i class="fa-solid fa-candy-cane"></i></div>
+      <div class="candy-float" style="--d:0.7s;--x:82%"><i class="fa-solid fa-cookie-bite"></i></div>
+      <div class="candy-float" style="--d:1.2s;--x:45%"><i class="fa-solid fa-cookie"></i></div>
+      <div class="candy-float" style="--d:0.3s;--x:22%"><i class="fa-solid fa-cake-candles"></i></div>
+      <div class="candy-float" style="--d:1.8s;--x:65%"><i class="fa-solid fa-ice-cream"></i></div>
+      <div class="candy-float" style="--d:0.9s;--x:90%"><i class="fa-solid fa-star"></i></div>
+      <div class="candy-float" style="--d:2.1s;--x:35%"><i class="fa-solid fa-heart"></i></div>
+      <div class="splash-stripe"></div>
+    </div>
+    <div class="splash-content">
+      <div class="splash-jaguar-wrap">
+        <div class="splash-jaguar-icon">
+          <img src="/assets/images/jaguar.jpg" alt="Juju" style="width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;">
+        </div>
+        <div class="splash-jaguar-bubble">Olá! Sou Juju Candy!</div>
+      </div>
+      <h1 class="splash-title">Candy<br>Math</h1>
+      <p class="splash-sub">Aprenda matemática com doces!</p>
+      <div class="splash-features">
+        <div class="splash-feat feat-pink"><i class="fa-solid fa-calculator"></i> Cálculos</div>
+        <div class="splash-feat feat-yellow"><i class="fa-solid fa-star"></i> Estrelas</div>
+        <div class="splash-feat feat-mint"><i class="fa-solid fa-shirt"></i> Figurinhas</div>
+      </div>
+      <button class="btn-play" id="btnPlay">
+        <i class="fa-solid fa-gamepad"></i> Jogar!
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== HUB SCREEN ===== -->
+  <div id="screenHub" class="screen">
+    <div class="hub-header">
+      <div class="hub-stat">
+        <span class="hub-stat-icon"><img src="/assets/images/coin.jpg" alt="Moeda" style="width: 24px; height: 24px; vertical-align: middle; mix-blend-mode: multiply;"></span>
+        <span class="hub-stat-val" id="hubStars">0</span>
+      </div>
+      <div class="hub-jaguar-center">
+        <div class="jaguar-display" id="jaguarDisplay">
+          <div class="jaguar-base-icon"><img src="/assets/images/jaguar.jpg" alt="Juju" style="width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;"></div>
+          <span class="k-layer k-hat"    id="kHat"></span>
+          <span class="k-layer k-glass"  id="kGlass"></span>
+          <span class="k-layer k-outfit" id="kOutfit"></span>
+          <span class="k-layer k-acc"    id="kAcc"></span>
+        </div>
+        <div class="jaguar-speech" id="jaguarSpeech">Vamos aprender! <i class="fa-solid fa-candy-cane"></i></div>
+      </div>
+      <div class="hub-stat">
+        <span class="hub-stat-icon"><img src="/assets/images/trophy.jpg" alt="Trophy" style="width: 24px; height: 24px; vertical-align: middle; margin-top: -4px; mix-blend-mode: multiply;"></span>
+        <span class="hub-stat-val" id="hubPhase">1</span>
+      </div>
+    </div>
+
+    <h2 class="hub-title">Escolha o jogo!</h2>
+
+    <h3 class="hub-topic-title"><i class="fa-solid fa-bolt"></i> Agilidade e Decisão</h3>
+    <div class="mode-grid">
+      <div class="mode-card mc-falling" onclick="openDifficulty('falling')">
+        <div class="mc-glow"></div>
+        <div class="mc-icon"><i class="fa-solid fa-cloud-showers-heavy"></i></div>
+        <div class="mc-name">Chuva de Doces</div>
+        <div class="mc-desc">Pegue a resposta correta caindo!</div>
+        <div class="mc-stars"><i class="fa-solid fa-star"></i> +15 por acerto</div>
+      </div>
+      <div class="mode-card mc-tf" onclick="openDifficulty('tf')">
+        <div class="mc-glow"></div>
+        <div class="mc-icon"><i class="fa-solid fa-check-double"></i></div>
+        <div class="mc-name">V ou F</div>
+        <div class="mc-desc">Decida rápido se está certo!</div>
+        <div class="mc-stars"><i class="fa-solid fa-star"></i> +10 por acerto</div>
+      </div>
+    </div>
+
+    <h3 class="hub-topic-title"><i class="fa-solid fa-brain"></i> Raciocínio e Memória</h3>
+    <div class="mode-grid">
+      <div class="mode-card mc-quiz" onclick="openDifficulty('quiz')">
+        <div class="mc-glow"></div>
+        <div class="mc-icon"><i class="fa-solid fa-candy-cane"></i></div>
+        <div class="mc-name">Quiz Doce</div>
+        <div class="mc-desc">Perguntas de matemática com doces!</div>
+        <div class="mc-stars"><i class="fa-solid fa-star"></i> +10 por acerto</div>
+      </div>
+      <div class="mode-card mc-memory" onclick="openDifficulty('memory')">
+        <div class="mc-glow"></div>
+        <div class="mc-icon"><i class="fa-solid fa-clone"></i></div>
+        <div class="mc-name">Memória Doce</div>
+        <div class="mc-desc">Encontre os pares corretos!</div>
+        <div class="mc-stars"><i class="fa-solid fa-star"></i> +20 por partida</div>
+      </div>
+      <div class="mode-card mc-puzzle" onclick="startMode('puzzle')">
+        <div class="mc-glow"></div>
+        <div class="mc-icon"><i class="fa-solid fa-puzzle-piece"></i></div>
+        <div class="mc-name">Cruzadinha</div>
+        <div class="mc-desc">Complete a grade de números!</div>
+        <div class="mc-stars"><i class="fa-solid fa-star"></i> +30 por puzzle</div>
+      </div>
+    </div>
+
+    <div class="hub-actions">
+      <button class="btn-hub-action bha-shop" onclick="openShop()">
+        <i class="fa-solid fa-shirt"></i><span>Figurinhas</span>
+      </button>
+      <button class="btn-hub-action bha-records" onclick="openModal('modalRecords')">
+        <i class="fa-solid fa-trophy"></i><span>Recordes</span>
+      </button>
+      <button class="btn-hub-action bha-sound" id="btnSound" onclick="toggleSound()">
+        <i class="fa-solid fa-volume-high" id="soundIcon"></i><span>Som</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== QUIZ SCREEN ===== -->
+  <div id="screenQuiz" class="screen">
+    <div class="game-top-bar">
+      <button class="btn-back" onclick="goHub()"><i class="fa-solid fa-arrow-left"></i> Voltar</button>
+      <div class="gtb-title"><i class="fa-solid fa-candy-cane"></i> Quiz Doce</div>
+      <div class="gtb-info">
+        <span id="quizProg">1/5</span> · <i class="fa-solid fa-star"></i><span id="quizStarsBar">0</span>
+      </div>
+    </div>
+
+    <div class="q-progress-dots" id="qDots">
+      <div class="qdot" data-i="0"></div>
+      <div class="qdot" data-i="1"></div>
+      <div class="qdot" data-i="2"></div>
+      <div class="qdot" data-i="3"></div>
+      <div class="qdot" data-i="4"></div>
+    </div>
+
+    <div class="quiz-card" id="quizCard">
+      <div class="qcard-top">
+        <span class="diff-tag" id="quizDiff">Fácil</span>
+        <button class="btn-speak" onclick="speakText()" title="Ouvir">
+          <i class="fa-solid fa-volume-high"></i>
+        </button>
+      </div>
+      <div class="qcard-emoji" id="quizEmoji">
+        <i class="fa-solid fa-candy-cane"></i>
+      </div>
+      <p class="qcard-text" id="quizText">Carregando...</p>
+    </div>
+
+    <div class="quiz-answers" id="quizAnswers"></div>
+
+    <div class="quiz-feedback" id="quizFeedback">
+      <span class="qf-jaguar"><img src="/assets/images/jaguar_happy.jpg" alt="Juju" style="width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;"></span>
+      <div class="qf-bubble" id="quizFeedbackMsg">Boa!</div>
+    </div>
+  </div>
+
+  <!-- ===== FALLING CANDIES SCREEN ===== -->
+  <div id="screenFalling" class="screen">
+    <div class="game-top-bar">
+      <button class="btn-back" onclick="goHub()"><i class="fa-solid fa-arrow-left"></i> Voltar</button>
+      <div class="gtb-title"><i class="fa-solid fa-cloud-showers-heavy"></i> Chuva de Doces</div>
+      <div class="gtb-info">
+        <span id="fallingProg">1/5</span> · <i class="fa-solid fa-star"></i><span id="fallingStarsBar">0</span>
+      </div>
+    </div>
+
+    <div class="falling-question-wrap">
+      <div class="falling-diff-tag" id="fallingDiff">Nível 1</div>
+      <p class="falling-q-text" id="fallingText">Carregando...</p>
+    </div>
+
+    <div class="falling-stage" id="fallingStage">
+      <!-- Candies will fall here -->
+    </div>
+
+    <div class="falling-feedback" id="fallingFeedback">
+      <span><img src="/assets/images/jaguar_happy.jpg" alt="Juju" style="width:28px;height:28px;object-fit:contain;mix-blend-mode:multiply;"></span>
+      <div class="falling-feedback-msg" id="fallingFeedbackMsg">Pegue a resposta!</div>
+    </div>
+  </div>
+
+  <!-- ===== PUZZLE SCREEN ===== -->
+  <div id="screenPuzzle" class="screen">
+    <div class="game-top-bar">
+      <button class="btn-back" onclick="goHub()"><i class="fa-solid fa-arrow-left"></i> Voltar</button>
+      <div class="gtb-title"><i class="fa-solid fa-puzzle-piece"></i> Cruzadinha</div>
+      <div class="gtb-info">
+        <span id="puzzleLvlLabel">Nível 1</span> · <i class="fa-solid fa-star"></i><span id="puzzleStarsBar">0</span>
+      </div>
+    </div>
+
+    <div class="puzzle-info-card">
+      <span class="puzzle-jaguar"><img src="/assets/images/jaguar_thinking.jpg" alt="Juju" style="width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;"></span>
+      <div>
+        <strong id="puzzleTitle">Adição de Doces</strong>
+        <p id="puzzleDesc">Preencha os <strong>?</strong> para que as somas batam!</p>
+      </div>
+    </div>
+
+    <div class="puzzle-outer">
+      <div class="puzzle-grid-wrap" id="puzzleGridWrap"></div>
+    </div>
+
+    <div class="puzzle-btns">
+      <button class="btn-hint" onclick="giveHint()"><i class="fa-solid fa-lightbulb"></i> Dica</button>
+      <button class="btn-check-puzzle" onclick="checkPuzzle()"><i class="fa-solid fa-check"></i> Verificar</button>
+      <button class="btn-next-puzzle" id="btnNextPuzzle" onclick="nextPuzzle()" style="display:none"><i class="fa-solid fa-arrow-right"></i> Próximo</button>
+    </div>
+  </div>
+
+  <!-- ===== MEMORY SCREEN ===== -->
+  <div id="screenMemory" class="screen">
+    <div class="game-top-bar">
+      <button class="btn-back" onclick="goHub()"><i class="fa-solid fa-arrow-left"></i> Voltar</button>
+      <div class="gtb-title"><i class="fa-solid fa-clone"></i> Memória Doce</div>
+      <div class="gtb-info">
+        <span id="memoryProg">Pares: 0/4</span> · <i class="fa-solid fa-star"></i><span id="memoryStarsBar">0</span>
+      </div>
+    </div>
+    
+    <div class="memory-outer">
+      <div class="memory-grid" id="memoryGrid"></div>
+    </div>
+
+    <div class="quiz-feedback" id="memoryFeedback">
+      <span class="qf-jaguar"><img src="/assets/images/jaguar_happy.jpg" alt="Juju" style="width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;"></span>
+      <div class="qf-bubble" id="memoryFeedbackMsg">Boa Sorte!</div>
+    </div>
+  </div>
+
+  <!-- ===== TRUE / FALSE SCREEN ===== -->
+  <div id="screenTrueFalse" class="screen">
+    <div class="game-top-bar">
+      <button class="btn-back" onclick="goHub()"><i class="fa-solid fa-arrow-left"></i> Voltar</button>
+      <div class="gtb-title"><i class="fa-solid fa-check-double"></i> V ou F</div>
+      <div class="gtb-info">
+        <span id="tfProg">1/5</span> · <i class="fa-solid fa-star"></i><span id="tfStarsBar">0</span>
+      </div>
+    </div>
+
+    <div class="q-progress-dots" id="tfDots">
+      <div class="qdot" data-i="0"></div>
+      <div class="qdot" data-i="1"></div>
+      <div class="qdot" data-i="2"></div>
+      <div class="qdot" data-i="3"></div>
+      <div class="qdot" data-i="4"></div>
+    </div>
+
+    <div class="quiz-card" id="tfCard">
+      <div class="qcard-top">
+        <span class="diff-tag" id="tfDiff">Fácil</span>
+      </div>
+      <div class="qcard-emoji" id="tfEmoji">
+        <i class="fa-solid fa-question"></i>
+      </div>
+      <p class="qcard-text" id="tfText" style="font-size:24px; margin-bottom:20px;">Carregando...</p>
+    </div>
+
+    <div class="tf-answers" style="display:flex; gap:16px; padding:16px; justify-content:center;">
+      <button class="ans-btn" style="flex:1; background:linear-gradient(135deg,var(--green),#4da34d); color:#fff;" onclick="handleTFAnswer(true)">
+        <i class="fa-solid fa-check"></i> Verdadeiro
+      </button>
+      <button class="ans-btn" style="flex:1; background:linear-gradient(135deg,var(--red),#cc2222); color:#fff;" onclick="handleTFAnswer(false)">
+        <i class="fa-solid fa-xmark"></i> Falso
+      </button>
+    </div>
+
+    <div class="quiz-feedback" id="tfFeedback">
+      <span class="qf-jaguar"><img src="/assets/images/jaguar_happy.jpg" alt="Juju" style="width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;"></span>
+      <div class="qf-bubble" id="tfFeedbackMsg">Vamos lá!</div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: DIFFICULTY ===== -->
+  <div id="modalDifficulty" class="modal" style="display:none">
+    <div class="modal-box diff-box">
+      <div class="modal-hdr">
+        <h2><i class="fa-solid fa-layer-group"></i> Escolha a Dificuldade</h2>
+        <button class="btn-close-modal" onclick="closeModal('modalDifficulty')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      
+      <div class="diff-levels">
+        <button class="diff-btn diff-lvl1" id="diffBtn1" onclick="selectDifficulty(1)">
+          <div class="d-icon" id="diffIcon1"><i class="fa-solid fa-plus"></i></div>
+          <div class="d-info">
+            <strong>Nível 1</strong>
+            <span id="diffDesc1">Apenas Soma</span>
+          </div>
+        </button>
+        <button class="diff-btn diff-lvl2" id="diffBtn2" onclick="selectDifficulty(2)">
+          <div class="d-icon" id="diffIcon2"><i class="fa-solid fa-minus"></i></div>
+          <div class="d-info">
+            <strong>Nível 2</strong>
+            <span id="diffDesc2">Soma e Subtração</span>
+          </div>
+        </button>
+        <button class="diff-btn diff-lvl3" id="diffBtn3" onclick="selectDifficulty(3)">
+          <div class="d-icon" id="diffIcon3"><i class="fa-solid fa-xmark"></i></div>
+          <div class="d-info">
+            <strong>Nível 3</strong>
+            <span id="diffDesc3">Até Multiplicação</span>
+          </div>
+        </button>
+        <button class="diff-btn diff-lvl4" id="diffBtn4" onclick="selectDifficulty(4)">
+          <div class="d-icon" id="diffIcon4"><i class="fa-solid fa-divide"></i></div>
+          <div class="d-info">
+            <strong>Nível 4</strong>
+            <span id="diffDesc4">Todas as Operações!</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: SHOP / WARDROBE ===== -->
+  <div id="modalShop" class="modal" style="display:none">
+    <div class="modal-box shop-box">
+      <div class="modal-hdr">
+        <h2><i class="fa-solid fa-shirt"></i> Guarda-Roupa da  Lili Candy</h2>
+        <div class="modal-coins"><i class="fa-solid fa-star"></i> <span id="shopCoins">0</span></div>
+        <button class="btn-close-modal" onclick="closeModal('modalShop')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="wardrobe-preview">
+        <div class="wd-jaguar-wrap">
+          <div class="wd-jaguar-base"><img src="/assets/images/jaguar.jpg" alt="Juju" style="width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;"></div>
+          <span class="wd-layer wd-hat"    id="wdHat"></span>
+          <span class="wd-layer wd-glass"  id="wdGlass"></span>
+          <span class="wd-layer wd-outfit" id="wdOutfit"></span>
+          <span class="wd-layer wd-acc"    id="wdAcc"></span>
+        </div>
+        <div class="wd-equipped-list" id="wdEquippedList">Nenhum item equipado</div>
+      </div>
+
+      <div class="shop-tabs" id="shopTabs">
+        <button class="stab active" onclick="filterShop('all',this)">Tudo</button>
+        <button class="stab" onclick="filterShop('hat',this)"><i class="fa-solid fa-hat-wizard"></i> Chapéus</button>
+        <button class="stab" onclick="filterShop('glasses',this)"><i class="fa-solid fa-glasses"></i> Óculos</button>
+        <button class="stab" onclick="filterShop('outfit',this)"><i class="fa-solid fa-shirt"></i> Roupas</button>
+        <button class="stab" onclick="filterShop('accessory',this)"><i class="fa-solid fa-wand-sparkles"></i> Extras</button>
+      </div>
+
+      <div class="shop-items-grid" id="shopGrid"></div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: RECORDS ===== -->
+  <div id="modalRecords" class="modal" style="display:none">
+    <div class="modal-box records-box">
+      <div class="modal-hdr">
+        <h2><i class="fa-solid fa-trophy"></i> Seus Recordes</h2>
+        <button class="btn-close-modal" onclick="closeModal('modalRecords')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="records-grid">
+        <div class="rec-card rc-yellow">
+          <div class="rc-icon"><i class="fa-solid fa-star"></i></div>
+          <div class="rc-label">Estrelas</div>
+          <div class="rc-val" id="recStars">0</div>
+        </div>
+        <div class="rec-card rc-pink">
+          <div class="rc-icon"><i class="fa-solid fa-trophy"></i></div>
+          <div class="rc-label">Maior Fase</div>
+          <div class="rc-val" id="recPhase">1</div>
+        </div>
+        <div class="rec-card rc-orange">
+          <div class="rc-icon"><i class="fa-solid fa-fire"></i></div>
+          <div class="rc-label">Sequência</div>
+          <div class="rc-val" id="recStreak">0</div>
+        </div>
+        <div class="rec-card rc-mint">
+          <div class="rc-icon"><i class="fa-solid fa-circle-check"></i></div>
+          <div class="rc-label">Acertos</div>
+          <div class="rc-val" id="recCorrect">0</div>
+        </div>
+      </div>
+      <button class="btn-reset-all" onclick="resetGame()"><i class="fa-solid fa-rotate-left"></i> Recomeçar Tudo</button>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: LEVEL UP ===== -->
+  <div id="modalLevelUp" class="modal" style="display:none">
+    <div class="modal-box levelup-box">
+      <div class="lu-confetti" id="luConfetti"></div>
+      <div class="lu-jaguar"><img src="/assets/images/jaguar_happy.jpg" alt="Juju" style="width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;"></div>
+      <h2 class="lu-title">Fase Completa!</h2>
+      <p class="lu-phase" id="luPhaseText">Fase 1 → Fase 2</p>
+      <p class="lu-stars" id="luStarsText">+50 <i class="fa-solid fa-star"></i></p>
+      <button class="btn-lu-continue" onclick="closeModal('modalLevelUp')">
+        Continuar! <i class="fa-solid fa-rocket"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== MODAL OVERLAY ===== -->
+  <div id="modalOverlay" class="modal-overlay" onclick="closeAllModals()"></div>
+
+  <canvas id="particleCanvas" style="position:fixed;top:0;left:0;pointer-events:none;z-index:9999"></canvas>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
