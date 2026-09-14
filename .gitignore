@@ -3,3 +3,6 @@ dist/
 .capacitor/
 .env
 .DS_Store
+
+# Documentação para IA
+ai_context.md
