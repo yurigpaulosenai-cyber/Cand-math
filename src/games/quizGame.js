@@ -4,10 +4,11 @@ import { pickQuestion } from '../engine/questionGenerator.js';
 import { $ } from '../utils/dom.js';
 import { MSGS } from '../data/messages.js';
 import { pick } from '../engine/questionGenerator.js';
-import { playSound } from '../audio/soundManager.js';
+import { playSound, speakText } from '../audio/soundManager.js';
 import { showConfetti } from '../effects/particles.js';
 import { saveState } from '../storage/persistence.js';
 import { finishRound } from './gameUtils.js';
+import { progressQuest } from './gameManager.js';
 
 let quizDotResults = [];
 
@@ -39,6 +40,8 @@ export function loadQuizQuestion() {
   $('quizCard').style.animation = 'none';
   void $('quizCard').offsetWidth;
   $('quizCard').style.animation = 'slideUp 0.4s ease';
+  
+  if (G.autoTTS) speakText(q.text);
 }
 
 export function shuffleOpts(opts, correctIdx) {
@@ -64,6 +67,13 @@ export function handleQuizAnswer(chosen, correct, btn) {
   const btns = document.querySelectorAll('#screenQuiz .ans-btn');
   btns.forEach(b => b.disabled = true);
 
+  // Track stats
+  const op = G.currentQ.op;
+  if (op && G.stats[op]) {
+    if (chosen === correct) G.stats[op].c++;
+    else G.stats[op].w++;
+  }
+
   if (chosen === correct) {
     btn.classList.add('correct');
     G.stars += 10;
@@ -77,6 +87,7 @@ export function handleQuizAnswer(chosen, correct, btn) {
     showQuizFeedback(msg);
     updateQuizDots('done', G.quizIndex);
     if (G.streak % 3 === 0) G.stars += 5; // streak bonus
+    progressQuest('correct_math', 1);
   } else {
     btn.classList.add('wrong');
     btns[correct].classList.add('correct-reveal');

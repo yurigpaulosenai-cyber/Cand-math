@@ -1,11 +1,15 @@
 import { G } from '../state/gameState.js';
 import { $ } from '../utils/dom.js';
-import { showScreen } from '../ui/screenManager.js';
+import { showScreen, openModal } from '../ui/screenManager.js';
 import { startQuizRound } from './quizGame.js';
 import { startFallingRound } from './fallingGame.js';
 import { startPuzzleMode } from './puzzleGame.js';
 import { startMemoryMode } from './memoryGame.js';
 import { startTFRound } from './trueFalseGame.js';
+import { saveState } from '../storage/persistence.js';
+import { playSound } from '../audio/soundManager.js';
+import { createConfetti } from '../effects/particles.js';
+import { updateHubUI } from '../ui/hubUI.js';
 
 let modeToLaunch = null;
 
@@ -53,4 +57,45 @@ export function startMode(mode) {
   if (mode === 'puzzle')  { startPuzzleMode();   showScreen('screenPuzzle'); }
   if (mode === 'memory')  { startMemoryMode();   showScreen('screenMemory'); }
   if (mode === 'tf')      { startTFRound();      showScreen('screenTrueFalse'); }
+}
+
+export function progressQuest(type, amount = 1) {
+  if (!G.dailyQuests) return;
+  let updated = false;
+  G.dailyQuests.forEach(q => {
+    if (q.type === type || q.type === 'play_any') {
+      if (q.progress < q.target) {
+        q.progress += amount;
+        if (q.progress > q.target) q.progress = q.target;
+        updated = true;
+      }
+    }
+  });
+  if (updated) saveState();
+}
+
+export function addXP(amount) {
+  G.xp += amount;
+  const xpNeeded = G.level * 100;
+  
+  if (G.xp >= xpNeeded) {
+    // Level UP!
+    G.xp -= xpNeeded;
+    G.level += 1;
+    G.stars += 100;
+    
+    // Show Modal XP Level Up
+    $('xpLevelText').textContent = `Nível ${G.level - 1} → ${G.level}`;
+    openModal('modalXPLevelUp');
+    
+    // Confetti and sound
+    setTimeout(() => {
+      playSound('win');
+      const box = document.querySelector('.levelup-box');
+      createConfetti('xpLuConfetti', box ? box.clientWidth : 300, box ? box.clientHeight : 300, 100);
+    }, 100);
+  }
+  
+  updateHubUI();
+  saveState();
 }

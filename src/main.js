@@ -65,6 +65,40 @@ window.checkPuzzle = checkPuzzle;
 window.giveHint = giveHint;
 window.nextPuzzle = nextPuzzle;
 
+window.toggleAutoTTS = function() {
+  G.autoTTS = !G.autoTTS;
+  saveState();
+  const btn = $('toggleTTSBtn');
+  if (btn) {
+    btn.textContent = G.autoTTS ? 'Ativado' : 'Desativado';
+    btn.className = G.autoTTS ? 'btn-toggle active' : 'btn-toggle';
+  }
+};
+
+window.toggleHighContrast = function() {
+  G.highContrast = !G.highContrast;
+  saveState();
+  const btn = $('toggleContrastBtn');
+  if (btn) {
+    btn.textContent = G.highContrast ? 'Ativado' : 'Desativado';
+    btn.className = G.highContrast ? 'btn-toggle active' : 'btn-toggle';
+  }
+  if (G.highContrast) document.body.classList.add('high-contrast');
+  else document.body.classList.remove('high-contrast');
+};
+
+window.toggleDyslexiaFont = function() {
+  G.dyslexiaFont = !G.dyslexiaFont;
+  saveState();
+  const btn = $('toggleFontBtn');
+  if (btn) {
+    btn.textContent = G.dyslexiaFont ? 'Ativado' : 'Desativado';
+    btn.className = G.dyslexiaFont ? 'btn-toggle active' : 'btn-toggle';
+  }
+  if (G.dyslexiaFont) document.body.classList.add('dyslexia-font');
+  else document.body.classList.remove('dyslexia-font');
+};
+
 // Extra for the records reset
 window.resetGame = function() {
   if (!confirm('Tem certeza? Todos os dados serão apagados!')) return;

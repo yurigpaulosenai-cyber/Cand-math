@@ -2,10 +2,11 @@ import { G } from '../state/gameState.js';
 import { pickQuestion, pick } from '../engine/questionGenerator.js';
 import { $ } from '../utils/dom.js';
 import { MSGS } from '../data/messages.js';
-import { playSound } from '../audio/soundManager.js';
+import { playSound, speakText } from '../audio/soundManager.js';
 import { showConfetti } from '../effects/particles.js';
 import { saveState } from '../storage/persistence.js';
 import { finishRound } from './gameUtils.js';
+import { progressQuest } from './gameManager.js';
 
 let fallingIndex = 0;
 let candiesFallen = 0;
@@ -25,6 +26,8 @@ export function loadFallingQuestion() {
   $('fallingDiff').textContent    = q.diff;
   $('fallingText').textContent    = q.text;
   $('fallingFeedback').classList.remove('show');
+  
+  if (G.autoTTS) speakText(q.text);
   
   const stage = $('fallingStage');
   stage.innerHTML = '';
@@ -76,6 +79,13 @@ export function handleCandyClick(c, isCorrect) {
     cand.dataset.stopped = true;
   });
 
+  // Track stats
+  const op = G.currentQ.op;
+  if (op && G.stats[op]) {
+    if (isCorrect) G.stats[op].c++;
+    else G.stats[op].w++;
+  }
+
   if (isCorrect) {
     c.classList.add('correct');
     G.stars += 15;
@@ -86,6 +96,7 @@ export function handleCandyClick(c, isCorrect) {
     playSound('correct');
     showConfetti();
     showFallingFeedback(pick(MSGS.correct));
+    progressQuest('correct_math', 1);
   } else {
     c.classList.add('wrong');
     G.streak = 0;

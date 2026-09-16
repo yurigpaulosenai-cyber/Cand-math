@@ -4,6 +4,7 @@ import { $ } from '../utils/dom.js';
 import { openModal } from '../ui/modalManager.js';
 import { spawnLevelUpConfetti } from '../effects/particles.js';
 import { playSound } from '../audio/soundManager.js';
+import { addXP, progressQuest } from './gameManager.js';
 
 export function finishRound(mode) {
   const correct = G.roundCorrect;
@@ -26,6 +27,12 @@ export function finishRound(mode) {
     ? `Fase ${oldPhase} → Fase ${G.phase}`
     : `Você acertou ${correct}/5`;
   $('luStarsText').innerHTML = `+${earned} <i class="fa-solid fa-star"></i>  (bônus: ${bonus})`;
+  
+  // Engagement Updates
+  progressQuest('play_any', 1);
+  progressQuest(`play_${mode}`, 1);
+  addXP(correct * 20 + bonus);
+  
   openModal('modalLevelUp');
   if (phaseChanged) spawnLevelUpConfetti();
   playSound('levelup');

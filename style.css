@@ -1428,6 +1428,193 @@ html, body {
 .btn-reset-all:hover, .btn-lu-continue:hover, .btn-login-submit:active {
   transform:translateY(4px) !important;
   box-shadow: 0 4px 0 var(--border), 0 6px 10px rgba(0,0,0,0.2) !important;
+
+/* ===================================================
+   CANDY CRUSH / CARTUNIZADO 2D OVERRIDES
+   =================================================== */
+
+:root {
+  --pink:    #FF3385;
+  --pink2:   #E6005C;
+  --pink-dark: #C2004B;
+  --yellow:  #FFD500;
+  --yellow-dark: #CCAA00;
+  --mint:    #00E5FF;
+  --purple:  #A200FF;
+  --purple-dark: #6B00B2;
+  --orange:  #FF7B00;
+  --orange-dark: #C25000;
+  --red:     #FF2A2A;
+  --red-dark: #C20000;
+  --blue:    #00A2FF;
+  --blue-dark: #006BB2;
+  --green:   #33CC33;
+  --green-dark: #1E8C1E;
+
+  --bg:      #D4F0FF;
+  --card:    #FFFFFF;
+  --border:  #4A2B65;
+
+  --text:    #4A2B65;
+  --text2:   #7A6B8A;
+  --white:   #FFFFFF;
+
+  --shadow-pink: 0 8px 0 var(--border), 0 12px 15px rgba(0,0,0,0.2);
+  --shadow-card: 0 8px 0 var(--border), 0 12px 15px rgba(0,0,0,0.2);
+  --r:       24px;
+  --r-sm:    16px;
+}
+
+html, body {
+  background: repeating-linear-gradient(45deg, #7CD4FF, #7CD4FF 30px, #5CB8FF 30px, #5CB8FF 60px) !important;
+}
+.login-bg {
+  background: repeating-linear-gradient(45deg, #7CD4FF, #7CD4FF 30px, #5CB8FF 30px, #5CB8FF 60px) !important;
+}
+
+.splash-title {
+  text-shadow: 
+    -3px -3px 0 var(--border),  
+     3px -3px 0 var(--border),
+    -3px  3px 0 var(--border),
+     3px  3px 0 var(--border),
+     0 8px 0 var(--orange-dark),
+     0 12px 10px rgba(0,0,0,0.4) !important;
+}
+
+.btn-play {
+  background: var(--green) !important;
+  border: 4px solid var(--border) !important;
+  box-shadow: 0 8px 0 var(--green-dark), 0 12px 20px rgba(0,0,0,0.3) !important;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.4) !important;
+  animation: none !important;
+}
+.btn-play:hover { transform:translateY(4px) !important; box-shadow: 0 4px 0 var(--green-dark), 0 6px 10px rgba(0,0,0,0.3) !important; }
+.btn-play:active { transform:translateY(8px) !important; box-shadow: 0 0 0 var(--green-dark), 0 2px 5px rgba(0,0,0,0.3) !important; }
+
+.btn-back {
+  border: 3px solid var(--border) !important;
+  box-shadow: 0 4px 0 var(--pink-dark), 0 6px 10px rgba(0,0,0,0.3) !important;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.3) !important;
+  background: var(--pink) !important;
+}
+.btn-back:hover { transform: translateY(2px) !important; box-shadow: 0 2px 0 var(--pink-dark), 0 4px 6px rgba(0,0,0,0.3) !important; }
+
+.hub-header {
+  border: 4px solid var(--border) !important;
+  border-top: none !important;
+  box-shadow: 0 8px 0 var(--border), 0 12px 15px rgba(0,0,0,0.2) !important;
+  background: var(--card) !important;
+}
+.hub-stat { border: 3px solid var(--border) !important; }
+
+.mode-card {
+  border: 4px solid var(--border) !important;
+  box-shadow: 0 8px 0 var(--border), 0 12px 15px rgba(0,0,0,0.2) !important;
+}
+.mode-card:hover { transform:translateY(4px) !important; box-shadow: 0 4px 0 var(--border), 0 6px 10px rgba(0,0,0,0.2) !important; }
+.mc-quiz { background: var(--pink) !important; }
+.mc-falling { background: var(--orange) !important; }
+.mc-puzzle { background: var(--purple) !important; }
+.mc-memory { background: var(--blue) !important; }
+.mc-tf { background: var(--green) !important; }
+
+.btn-hub-action {
+  border: 4px solid var(--border) !important;
+  box-shadow: 0 6px 0 var(--border), 0 8px 10px rgba(0,0,0,0.2) !important;
+}
+.btn-hub-action:hover { transform:translateY(3px) !important; box-shadow: 0 3px 0 var(--border), 0 4px 6px rgba(0,0,0,0.2) !important; }
+.bha-shop { background: var(--pink) !important; }
+.bha-records { background: var(--yellow) !important; }
+.bha-sound { background: var(--mint) !important; color: var(--text) !important; }
+
+.quiz-card, .falling-question-wrap, .puzzle-info-card, .puzzle-grid-wrap {
+  border: 4px solid var(--border) !important;
+  box-shadow: 0 8px 0 var(--border), 0 12px 15px rgba(0,0,0,0.2) !important;
+}
+
+.ans-btn {
+  border: 4px solid var(--border) !important;
+  box-shadow: 0 6px 0 var(--border), 0 8px 10px rgba(0,0,0,0.2) !important;
+}
+.ans-btn:hover:not(:disabled) { transform:translateY(3px) !important; box-shadow: 0 3px 0 var(--border), 0 4px 6px rgba(0,0,0,0.2) !important; }
+.ans-btn.correct, .ans-btn.correct-reveal { background: var(--green) !important; border-color: var(--border) !important; color: white !important;}
+.ans-btn.wrong { background: var(--red) !important; border-color: var(--border) !important; color: white !important; }
+
+.falling-stage {
+  border: 4px solid var(--border) !important;
+  background: var(--bg) !important;
+  box-shadow: inset 0 8px 0 rgba(0,0,0,0.1) !important;
+}
+.falling-candy {
+  border: 4px solid var(--border) !important;
+  box-shadow: 0 6px 0 var(--border), 0 8px 10px rgba(0,0,0,0.2) !important;
+}
+.falling-candy:active { transform: translateY(4px) !important; box-shadow: 0 2px 0 var(--border), 0 4px 6px rgba(0,0,0,0.2) !important; }
+
+.btn-hint, .btn-check-puzzle, .btn-next-puzzle {
+  border: 4px solid var(--border) !important;
+  box-shadow: 0 6px 0 var(--border), 0 8px 10px rgba(0,0,0,0.2) !important;
+}
+.btn-hint:hover, .btn-check-puzzle:hover, .btn-next-puzzle:hover { transform:translateY(3px) !important; box-shadow: 0 3px 0 var(--border), 0 4px 6px rgba(0,0,0,0.2) !important; }
+.btn-hint { background: var(--yellow) !important; }
+.btn-check-puzzle { background: var(--green) !important; }
+.btn-next-puzzle { background: var(--purple) !important; }
+
+.mcard-front {
+  border: 4px solid var(--border) !important;
+  box-shadow: inset 0 -4px 0 rgba(0,0,0,0.2) !important;
+  background: var(--blue) !important;
+}
+.mcard-back {
+  border: 4px solid var(--border) !important;
+}
+
+.modal-box {
+  border: 4px solid var(--border) !important;
+  box-shadow: 0 12px 0 var(--border), 0 16px 20px rgba(0,0,0,0.3) !important;
+}
+
+.diff-btn {
+  border: 4px solid var(--border) !important;
+  box-shadow: 0 6px 0 var(--border), 0 8px 10px rgba(0,0,0,0.2) !important;
+}
+.diff-btn:hover { transform:translateY(3px) !important; box-shadow: 0 3px 0 var(--border), 0 4px 6px rgba(0,0,0,0.2) !important; }
+.diff-lvl1 { background: var(--green) !important; }
+.diff-lvl2 { background: var(--yellow) !important; }
+.diff-lvl3 { background: var(--pink) !important; }
+.diff-lvl4 { background: var(--purple) !important; }
+
+.shop-item-card {
+  border: 4px solid var(--border) !important;
+  box-shadow: 0 6px 0 var(--border), 0 8px 10px rgba(0,0,0,0.2) !important;
+}
+.shop-item-card:hover { transform:translateY(3px) !important; box-shadow: 0 3px 0 var(--border), 0 4px 6px rgba(0,0,0,0.2) !important; }
+.sic-btn {
+  border: 3px solid var(--border) !important;
+  box-shadow: 0 4px 0 var(--border) !important;
+}
+.sic-btn:hover:not(.locked-btn) { transform:translateY(2px) !important; box-shadow: 0 2px 0 var(--border) !important; }
+.sic-btn.buy-btn { background: var(--purple) !important; }
+.sic-btn.equip-btn { background: var(--green) !important; }
+.sic-btn.unequip-btn { background: var(--orange) !important; }
+
+.rec-card {
+  border: 4px solid var(--border) !important;
+  box-shadow: 0 6px 0 var(--border), 0 8px 10px rgba(0,0,0,0.2) !important;
+}
+.rc-yellow { background: var(--yellow) !important; border-color: var(--border) !important; color: var(--border) !important; }
+.rc-pink { background: var(--pink) !important; border-color: var(--border) !important; color: white !important;}
+.rc-orange { background: var(--orange) !important; border-color: var(--border) !important; color: white !important;}
+.rc-mint { background: var(--mint) !important; border-color: var(--border) !important; color: var(--border) !important;}
+
+.btn-reset-all, .btn-lu-continue, .btn-login-submit {
+  border: 4px solid var(--border) !important;
+  box-shadow: 0 8px 0 var(--border), 0 12px 15px rgba(0,0,0,0.2) !important;
+}
+.btn-reset-all:hover, .btn-lu-continue:hover, .btn-login-submit:active {
+  transform:translateY(4px) !important;
+  box-shadow: 0 4px 0 var(--border), 0 6px 10px rgba(0,0,0,0.2) !important;
 }
 .btn-reset-all { background: var(--red) !important; color: white !important;}
 .btn-lu-continue { background: var(--pink) !important; color: white !important; }
@@ -1437,3 +1624,140 @@ html, body {
   border: 4px solid var(--border) !important;
   box-shadow: 0 4px 0 var(--border) !important;
 }
+
+/* ===== NOVO: XP BAR, QUESTS, SETTINGS, ACESSIBILIDADE ===== */
+
+/* Dyslexia Font Support */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&display=swap');
+body.dyslexia-font,
+body.dyslexia-font input,
+body.dyslexia-font button,
+body.dyslexia-font .qcard-text,
+body.dyslexia-font .mc-name,
+body.dyslexia-font .mc-desc {
+  font-family: 'Lexend', sans-serif !important;
+  letter-spacing: 0.5px;
+}
+
+/* XP Bar in Hub */
+.xp-bar-container {
+  width: 120px;
+  height: 20px;
+  background: var(--bg-dark);
+  border: 3px solid var(--border);
+  border-radius: 10px;
+  margin: 5px auto 0 auto;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 3px 5px rgba(0,0,0,0.3);
+}
+.xp-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff9f43, #ffc048);
+  width: 0%;
+  transition: width 0.4s ease-out;
+}
+.xp-bar-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 11px;
+  font-family: 'Luckiest Guy', cursive;
+  color: white;
+  text-shadow: 1px 1px 0 var(--border), -1px -1px 0 var(--border), 1px -1px 0 var(--border), -1px 1px 0 var(--border);
+  pointer-events: none;
+}
+
+/* Streak Icon (Fire) */
+.streak-stat.active {
+  color: #ff5722 !important;
+  filter: none !important;
+  animation: pulse-fire 2s infinite ease-in-out;
+}
+@keyframes pulse-fire {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* Quests Modal */
+.quests-box { border-color: var(--mint); }
+.quests-subtitle {
+  text-align: center; font-size: 14px; color: #666; margin-bottom: 12px;
+}
+.quests-list {
+  display: flex; flex-direction: column; gap: 12px; max-height: 50vh; overflow-y: auto; padding-right: 8px;
+}
+.quest-item {
+  background: white; border: 4px solid var(--border); border-radius: 16px; padding: 12px;
+  display: flex; flex-direction: column; gap: 8px;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+}
+.quest-info {
+  display: flex; justify-content: space-between; font-family: 'Luckiest Guy', cursive; font-size: 16px; color: var(--border);
+}
+.quest-reward {
+  color: var(--yellow); text-shadow: 1px 1px 0 #333;
+}
+.quest-prog-bar {
+  height: 12px; background: #eee; border-radius: 6px; border: 2px solid #ccc; overflow: hidden; position: relative;
+}
+.quest-prog-fill {
+  height: 100%; background: var(--mint); transition: width 0.3s;
+}
+.quest-prog-text {
+  position: absolute; width: 100%; text-align: center; font-size: 10px; font-weight: bold; top: -1px; color: #333;
+}
+.btn-claim {
+  background: var(--yellow); color: var(--border); border: 3px solid var(--border); border-radius: 12px;
+  padding: 6px; font-family: 'Luckiest Guy', cursive; font-size: 14px; cursor: pointer;
+  box-shadow: 0 4px 0 var(--border);
+}
+.btn-claim:hover { transform: translateY(2px); box-shadow: 0 2px 0 var(--border); }
+.quest-item.completed { opacity: 0.6; filter: grayscale(1); }
+
+/* Settings Modal */
+.settings-box { border-color: #888; }
+.settings-list {
+  display: flex; flex-direction: column; gap: 16px; margin-top: 10px;
+}
+.setting-item {
+  display: flex; justify-content: space-between; align-items: center;
+  background: #f8f9fa; border: 3px solid #ddd; border-radius: 16px; padding: 12px;
+}
+.setting-info { display: flex; flex-direction: column; max-width: 65%; }
+.setting-info strong { font-size: 16px; color: var(--border); margin-bottom: 4px; }
+.setting-info span { font-size: 11px; color: #666; line-height: 1.2; }
+.btn-toggle {
+  background: #ccc; color: white; border: 3px solid var(--border); border-radius: 20px;
+  padding: 6px 12px; font-weight: bold; font-family: 'Nunito', sans-serif; cursor: pointer;
+  transition: all 0.2s; box-shadow: 0 4px 0 var(--border); font-size: 12px; min-width: 80px; text-align: center;
+}
+.btn-toggle.active {
+  background: var(--green);
+}
+.btn-toggle:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--border); }
+
+/* High Contrast Mode */
+body.high-contrast {
+  --pink: #d81b60;
+  --yellow: #fdd835;
+  --mint: #00897b;
+  --blue: #1e88e5;
+  --purple: #8e24aa;
+  --orange: #f4511e;
+  --green: #43a047;
+  --red: #e53935;
+  --border: #000000;
+  --bg-light: #ffffff;
+  --bg-dark: #e0e0e0;
+}
+body.high-contrast .splash-bg { background: #000; }
+body.high-contrast .screen { background: #fff; }
+body.high-contrast .qcard-text { color: #000; text-shadow: none; font-weight: 900; }
+body.high-contrast .hub-title, body.high-contrast .splash-title {
+  color: #000; text-shadow: none;
+}
+body.high-contrast .quest-item { background: #fff; border-color: #000; }
+body.high-contrast .mc-desc { color: #000; }}

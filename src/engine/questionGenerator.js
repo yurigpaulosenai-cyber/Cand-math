@@ -1,5 +1,35 @@
+import { G } from '../state/gameState.js';
+
 export function pick(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function getWeightedOp(availableOps) {
+  if (!G.stats || availableOps.length <= 1) return pick(availableOps);
+
+  let weights = [];
+  let totalWeight = 0;
+
+  availableOps.forEach(opKey => {
+    const stat = G.stats[opKey];
+    // Se a criança erra, o peso sobe. 
+    // Peso base = 10. Cada erro a mais que acerto = +2. Max peso = 40.
+    let weight = 10;
+    if (stat) {
+      const errorRate = stat.w - stat.c;
+      if (errorRate > 0) weight += errorRate * 2;
+    }
+    weight = Math.min(weight, 40);
+    weights.push({ op: opKey, weight });
+    totalWeight += weight;
+  });
+
+  let rand = Math.random() * totalWeight;
+  for (let w of weights) {
+    if (rand < w.weight) return w.op;
+    rand -= w.weight;
+  }
+  return pick(availableOps);
 }
 
 export function generateQuestion(level = 1) {
@@ -7,29 +37,29 @@ export function generateQuestion(level = 1) {
   const icons = ['fa-candy-cane', 'fa-cookie-bite', 'fa-cookie', 'fa-ice-cream', 'fa-cake-candles', 'fa-circle-dot'];
   const icon = pick(icons);
 
-  const ops = ['+'];
-  if (level >= 2) ops.push('-');
-  if (level >= 3) ops.push('*');
-  if (level >= 4) ops.push('/');
+  const opsMap = ['add'];
+  if (level >= 2) opsMap.push('sub');
+  if (level >= 3) opsMap.push('mul');
+  if (level >= 4) opsMap.push('div');
   
-  const op = pick(ops);
+  const opKey = getWeightedOp(opsMap);
 
-  if (op === '+') {
+  if (opKey === 'add') {
     op1 = Math.floor(Math.random() * 10) + 1;
     op2 = Math.floor(Math.random() * 10) + 1;
     res = op1 + op2;
     symbol = '+';
-  } else if (op === '-') {
+  } else if (opKey === 'sub') {
     op1 = Math.floor(Math.random() * 15) + 5;
     op2 = Math.floor(Math.random() * op1) + 1;
     res = op1 - op2;
     symbol = '-';
-  } else if (op === '*') {
+  } else if (opKey === 'mul') {
     op1 = Math.floor(Math.random() * 10) + 1;
     op2 = Math.floor(Math.random() * 10) + 1;
     res = op1 * op2;
     symbol = '×';
-  } else if (op === '/') {
+  } else if (opKey === 'div') {
     res = Math.floor(Math.random() * 9) + 2;
     op2 = Math.floor(Math.random() * 9) + 2;
     op1 = res * op2;
@@ -48,7 +78,7 @@ export function generateQuestion(level = 1) {
   let ansIdx = opts.indexOf(res);
   let diffText = level === 1 ? "Iniciante" : level === 2 ? "Aprendiz" : level === 3 ? "Experiente" : "Mestre";
 
-  return { diff: diffText, icon, text, opts: opts.map(String), ans: ansIdx, numericRes: res };
+  return { diff: diffText, icon, text, opts: opts.map(String), ans: ansIdx, numericRes: res, op: opKey };
 }
 
 export function pickQuestion(selectedLevel) {

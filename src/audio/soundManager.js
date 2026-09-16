@@ -53,10 +53,11 @@ export function playSound(type) {
   } catch(e) { console.warn('Audio error:', e); }
 }
 
-export function speakText() {
-  if (!G.currentQ || !('speechSynthesis' in window)) return;
+export function speakText(textOverride) {
+  const textToSpeak = textOverride || (G.currentQ ? G.currentQ.text : null);
+  if (!textToSpeak || !('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(G.currentQ.text);
+  const u = new SpeechSynthesisUtterance(textToSpeak);
   u.lang = 'pt-BR'; u.rate = 0.9;
   window.speechSynthesis.speak(u);
 }
