@@ -9,7 +9,7 @@ import { startMemoryMode } from './memoryGame.js';
 import { startTFRound } from './trueFalseGame.js';
 import { saveState } from '../storage/persistence.js';
 import { playSound } from '../audio/soundManager.js';
-import { createConfetti } from '../effects/particles.js';
+import { spawnLevelUpConfetti } from '../effects/particles.js';
 import { updateHubUI } from '../ui/hubUI.js';
 
 let modeToLaunch = null;
@@ -91,9 +91,8 @@ export function addXP(amount) {
     
     // Confetti and sound
     setTimeout(() => {
-      playSound('win');
-      const box = document.querySelector('.levelup-box');
-      createConfetti('xpLuConfetti', box ? box.clientWidth : 300, box ? box.clientHeight : 300, 100);
+      playSound('levelup');
+      spawnLevelUpConfetti();
     }, 100);
   }
   
