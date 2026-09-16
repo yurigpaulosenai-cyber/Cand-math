@@ -1,6 +1,7 @@
 import { G } from '../state/gameState.js';
 import { $ } from '../utils/dom.js';
-import { showScreen, openModal } from '../ui/screenManager.js';
+import { showScreen } from '../ui/screenManager.js';
+import { openModal } from '../ui/modalManager.js';
 import { startQuizRound } from './quizGame.js';
 import { startFallingRound } from './fallingGame.js';
 import { startPuzzleMode } from './puzzleGame.js';
