@@ -1,6 +1,7 @@
 {
   "name": "candy-math",
   "version": "1.0.0",
+  "type": "module",
   "description": "Candy Math - Jogo educativo de matemática",
   "main": "index.js",
   "scripts": {
